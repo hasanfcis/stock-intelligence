@@ -1,0 +1,27 @@
+# Component weights for the overall score (Specification.md Section 7).
+# Must sum to 1.0 — validated at load time.
+weights:
+  catalyst: 0.40
+  technical: 0.35
+  sentiment: 0.25
+
+# Action-category thresholds, applied to overall_score (0-100).
+thresholds:
+  strong_buy_setup: 80
+  watch: 60
+  neutral: 40
+  # anything below 'neutral' -> avoid_sell
+
+# Caps / decay used by the catalyst component score (Section 7).
+catalyst_scoring:
+  max_catalysts_counted: 8
+  impact_weights:
+    very_high: 1.0
+    high: 0.7
+    medium: 0.4
+    low: 0.15
+  horizon_decay:
+    immediate: 1.0
+    short: 0.85
+    medium: 0.6
+    long: 0.35

@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-12",
+  "universe_size": 8,
+  "excluded": [
+    {
+      "symbol": "SOME_BANK",
+      "rule_id": "exclude_primary_lenders",
+      "reason": "Primary business is interest-based lending."
+    }
+  ],
+  "market_context": {
+    "as_of": "2026-09-12",
+    "spx_change_pct": 0.4,
+    "nasdaq_change_pct": 0.6,
+    "sox_change_pct": 1.8,
+    "ten_year_yield": 4.12,
+    "vix": 14.3
+  },
+  "scores": [
+    {
+      "ticker": "NVDA",
+      "as_of": "2026-09-12",
+      "price": 187.32,
+      "catalyst_score": 94.0,
+      "technical_score": 86.0,
+      "sentiment_score": 88.0,
+      "overall_score": 89.7,
+      "weights_used": {"catalyst": 0.40, "technical": 0.35, "sentiment": 0.25},
+      "action_category": "Strong Buy Setup",
+      "why_today": [
+        "Hyperscaler flags higher AI infrastructure capex for next fiscal year",
+        "Two analysts raise price targets after channel checks",
+        "Price broke resistance ($183.10) on relative volume 2.4x average"
+      ],
+      "thesis_vs_price": {
+        "company_quality": "excellent",
+        "long_term_thesis": "bullish",
+        "price_state": "fair",
+        "action": "ENTER"
+      },
+      "entry": [182.0, 188.0],
+      "stop": 174.5,
+      "targets": [198.0, 212.0],
+      "risk_reward": 2.0,
+      "confidence": 0.72,
+      "catalyst_ids": ["cat_nvda_000", "cat_nvda_001"],
+      "sources": [
+        {
+          "source_name": "Company IR release",
+          "url": "https://example.com/nvda-capex-readthrough",
+          "published_at": "2026-09-12T08:31:00Z",
+          "summary": "A major cloud provider told investors on its earnings call that AI infrastructure spending would increase materially next year."
+        }
+      ]
+    },
+    {
+      "ticker": "PLTR",
+      "as_of": "2026-09-12",
+      "price": 41.10,
+      "catalyst_score": 78.0,
+      "technical_score": 62.0,
+      "sentiment_score": 70.0,
+      "overall_score": 70.7,
+      "weights_used": {"catalyst": 0.40, "technical": 0.35, "sentiment": 0.25},
+      "action_category": "Watch",
+      "why_today": [
+        "New multi-year government contract announced"
+      ],
+      "thesis_vs_price": {
+        "company_quality": "good",
+        "long_term_thesis": "bullish",
+        "price_state": "fair",
+        "action": "ENTER"
+      },
+      "entry": [39.5, 41.8],
+      "stop": 37.2,
+      "targets": [46.0, 50.5],
+      "risk_reward": 2.0,
+      "confidence": 0.75,
+      "catalyst_ids": ["cat_pltr_000"],
+      "sources": [
+        {
+          "source_name": "Company press release",
+          "url": "https://example.com/pltr-contract",
+          "published_at": "2026-09-12T07:10:00Z",
+          "summary": "The company announced a new multi-year contract with a federal agency for its platform software."
+        }
+      ]
+    }
+  ],
+  "negative_catalysts": []
+}

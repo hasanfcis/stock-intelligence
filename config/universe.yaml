@@ -1,0 +1,39 @@
+# Starter universe (Specification.md Section 2). Add/remove tickers here — no code change needed.
+tickers:
+  - symbol: NVDA
+    category: semiconductors
+    name: NVIDIA Corporation
+  - symbol: AMD
+    category: semiconductors
+    name: Advanced Micro Devices
+  - symbol: PLTR
+    category: software_ai
+    name: Palantir Technologies
+  - symbol: TSLA
+    category: ev
+    name: Tesla Inc
+  - symbol: ASML
+    category: semi_equipment
+    name: ASML Holding
+  - symbol: AMAT
+    category: semi_equipment
+    name: Applied Materials
+  - symbol: LRCX
+    category: semi_equipment
+    name: Lam Research
+  - symbol: KLAC
+    category: semi_equipment
+    name: KLA Corporation
+
+# Industry-catalyst propagation graph (Specification.md Section 6).
+# A catalyst tagged on one of these related symbols/indices is also
+# considered a SECTOR_DEMAND_SIGNAL / SUPPLY_CHAIN_SIGNAL candidate for the ticker.
+industry_links:
+  NVDA: [MSFT, AMZN, GOOGL, META, TSM, SOX]
+  AMD: [MSFT, AMZN, GOOGL, META, TSM, SOX]
+  ASML: [TSM, INTC, SOX]
+  AMAT: [TSM, INTC, SOX]
+  LRCX: [TSM, INTC, SOX]
+  KLAC: [TSM, INTC, SOX]
+  PLTR: [MSFT, GOOGL, AMZN]
+  TSLA: [BYDDF, RIVN, LCID]

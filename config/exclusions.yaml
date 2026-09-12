@@ -1,0 +1,28 @@
+# Hard exclusion rules (Specification.md Section 2). Run before any paid API / LLM calls.
+# "domicile" style rules check where a company is incorporated/primarily listed,
+# not whether it merely has operations or employees there.
+rules:
+  - id: exclude_israeli_domiciled
+    description: >
+      Exclude companies domiciled/incorporated in Israel. Does NOT exclude a
+      company merely because it has Israeli operations, an R&D office, or
+      employees there.
+      symbols: []  # populate explicitly, e.g. via a maintained domicile lookup
+    type: domicile
+    country: IL
+    symbols: []
+
+  - id: exclude_primary_lenders
+    description: >
+      Exclude companies whose PRIMARY business is interest-based lending
+      (banks, consumer/commercial lenders). A payments or fintech company that
+      is not primarily a lender is NOT excluded by this rule.
+      symbols: []  # populate explicitly, e.g. via a maintained sector lookup
+    type: business_model
+    business_model: primary_lender
+    symbols: []
+
+  - id: user_defined
+    description: "Any other user-defined exclusion sector — add symbols as needed."
+    type: manual
+    symbols: []
