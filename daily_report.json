@@ -1,0 +1,255 @@
+{
+  "date": "2026-09-12",
+  "universe_size": 4,
+  "excluded": [],
+  "market_context": {
+    "as_of": "2026-09-12",
+    "spx_change_pct": -0.09,
+    "nasdaq_change_pct": -0.09,
+    "sox_change_pct": 1.45,
+    "ten_year_yield": 4.1,
+    "vix": 15.0
+  },
+  "scores": [
+    {
+      "ticker": "PLTR",
+      "as_of": "2026-09-12",
+      "price": 180.24,
+      "catalyst_score": 65.8,
+      "technical_score": 70.0,
+      "sentiment_score": 87.5,
+      "overall_score": 72.7,
+      "weights_used": {
+        "catalyst": 0.4,
+        "technical": 0.35,
+        "sentiment": 0.25
+      },
+      "action_category": "Watch",
+      "why_today": [
+        "New multi-year government contract announced"
+      ],
+      "thesis_vs_price": {
+        "company_quality": "good",
+        "long_term_thesis": "bullish",
+        "price_state": "fair",
+        "action": "ENTER"
+      },
+      "entry": [
+        170.59,
+        189.21
+      ],
+      "stop": 162.23,
+      "targets": [
+        243.17,
+        270.15
+      ],
+      "risk_reward": 2.0,
+      "confidence": 0.75,
+      "catalyst_ids": [
+        "cat_pltr_000"
+      ],
+      "sources": [
+        {
+          "source_name": "Company press release",
+          "url": "https://example.com/pltr-contract",
+          "published_at": "2026-09-12T20:41:43.114302Z",
+          "summary": "The company announced a new multi-year contract with a federal agency for its platform software."
+        }
+      ]
+    },
+    {
+      "ticker": "AMD",
+      "as_of": "2026-09-12",
+      "price": 176.31,
+      "catalyst_score": 59.0,
+      "technical_score": 77.5,
+      "sentiment_score": 87.5,
+      "overall_score": 72.6,
+      "weights_used": {
+        "catalyst": 0.4,
+        "technical": 0.35,
+        "sentiment": 0.25
+      },
+      "action_category": "Watch",
+      "why_today": [
+        "New AI accelerator sampling ahead of schedule"
+      ],
+      "thesis_vs_price": {
+        "company_quality": "good",
+        "long_term_thesis": "neutral",
+        "price_state": "fair",
+        "action": "WAIT"
+      },
+      "entry": [
+        143.21,
+        178.79
+      ],
+      "stop": 136.19,
+      "targets": [
+        263.99,
+        306.59
+      ],
+      "risk_reward": 2.0,
+      "confidence": 0.75,
+      "catalyst_ids": [
+        "cat_amd_000"
+      ],
+      "sources": [
+        {
+          "source_name": "Company press release",
+          "url": "https://example.com/amd-accelerator",
+          "published_at": "2026-09-12T20:41:43.109377Z",
+          "summary": "The company said its next-generation AI accelerator is sampling with customers ahead of the previously communicated timeline."
+        }
+      ]
+    },
+    {
+      "ticker": "NVDA",
+      "as_of": "2026-09-12",
+      "price": 185.49,
+      "catalyst_score": 54.5,
+      "technical_score": 40.1,
+      "sentiment_score": 68.8,
+      "overall_score": 53.0,
+      "weights_used": {
+        "catalyst": 0.4,
+        "technical": 0.35,
+        "sentiment": 0.25
+      },
+      "action_category": "Neutral",
+      "why_today": [
+        "Hyperscaler flags higher AI infrastructure capex for next fiscal year",
+        "Two analysts raise price targets after channel checks"
+      ],
+      "thesis_vs_price": {
+        "company_quality": "fair",
+        "long_term_thesis": "neutral",
+        "price_state": "cheap",
+        "action": "WAIT"
+      },
+      "entry": [
+        185.49,
+        216.88
+      ],
+      "stop": 177.76,
+      "targets": [
+        295.12,
+        334.24
+      ],
+      "risk_reward": 2.0,
+      "confidence": 0.75,
+      "catalyst_ids": [
+        "cat_nvda_000",
+        "cat_nvda_001"
+      ],
+      "sources": [
+        {
+          "source_name": "Company IR release",
+          "url": "https://example.com/nvda-capex-readthrough",
+          "published_at": "2026-09-12T20:41:43.103923Z",
+          "summary": "A major cloud provider told investors on its earnings call that AI infrastructure spending would increase materially next year."
+        },
+        {
+          "source_name": "Sell-side research note",
+          "url": "https://example.com/nvda-pt-raises",
+          "published_at": "2026-09-12T19:41:43.103930Z",
+          "summary": "Sell-side coverage raised price targets citing stronger-than-expected data center demand checks."
+        }
+      ]
+    },
+    {
+      "ticker": "TSLA",
+      "as_of": "2026-09-12",
+      "price": 162.55,
+      "catalyst_score": 37.2,
+      "technical_score": 61.7,
+      "sentiment_score": 12.5,
+      "overall_score": 39.6,
+      "weights_used": {
+        "catalyst": 0.4,
+        "technical": 0.35,
+        "sentiment": 0.25
+      },
+      "action_category": "Avoid / Sell",
+      "why_today": [
+        "Delivery estimate trimmed by one sell-side analyst"
+      ],
+      "thesis_vs_price": {
+        "company_quality": "poor",
+        "long_term_thesis": "bearish",
+        "price_state": "fair",
+        "action": "AVOID"
+      },
+      "entry": [
+        160.83,
+        171.35
+      ],
+      "stop": 152.95,
+      "targets": [
+        208.15,
+        226.55
+      ],
+      "risk_reward": 2.0,
+      "confidence": 0.75,
+      "catalyst_ids": [
+        "cat_tsla_000"
+      ],
+      "sources": [
+        {
+          "source_name": "Sell-side research note",
+          "url": "https://example.com/tsla-deliveries",
+          "published_at": "2026-09-12T20:41:43.118961Z",
+          "summary": "An analyst lowered next-quarter delivery estimates citing softer regional demand data."
+        }
+      ]
+    }
+  ],
+  "negative_catalysts": [
+    {
+      "ticker": "TSLA",
+      "as_of": "2026-09-12",
+      "price": 162.55,
+      "catalyst_score": 37.2,
+      "technical_score": 61.7,
+      "sentiment_score": 12.5,
+      "overall_score": 39.6,
+      "weights_used": {
+        "catalyst": 0.4,
+        "technical": 0.35,
+        "sentiment": 0.25
+      },
+      "action_category": "Avoid / Sell",
+      "why_today": [
+        "Delivery estimate trimmed by one sell-side analyst"
+      ],
+      "thesis_vs_price": {
+        "company_quality": "poor",
+        "long_term_thesis": "bearish",
+        "price_state": "fair",
+        "action": "AVOID"
+      },
+      "entry": [
+        160.83,
+        171.35
+      ],
+      "stop": 152.95,
+      "targets": [
+        208.15,
+        226.55
+      ],
+      "risk_reward": 2.0,
+      "confidence": 0.75,
+      "catalyst_ids": [
+        "cat_tsla_000"
+      ],
+      "sources": [
+        {
+          "source_name": "Sell-side research note",
+          "url": "https://example.com/tsla-deliveries",
+          "published_at": "2026-09-12T20:41:43.118961Z",
+          "summary": "An analyst lowered next-quarter delivery estimates citing softer regional demand data."
+        }
+      ]
+    }
+  ]
+}

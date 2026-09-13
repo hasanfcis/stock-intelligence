@@ -10,6 +10,8 @@ import random
 from datetime import datetime, timedelta, timezone
 
 from ..technical.indicators import Bar
+from ..models.catalyst import Evidence
+from ..models.macro import MacroEvent, MacroIndicator
 from .base import Fundamentals, NewsItem, PriceSeries
 
 _SEED_OFFSETS = {
@@ -129,3 +131,28 @@ class MockFundamentalsProvider:
             pe_ratio=rng.uniform(15, 90),
             revenue_ttm=rng.uniform(1e9, 100e9),
         )
+
+
+class MockMacroDataProvider:
+    """A single deterministic macro release per call — a CPI print that came
+    in hotter than expected, matching the worked example in the planning
+    doc/architecture diagram. Swap for a real provider (e.g. FRED, a
+    calendar/consensus API) behind the same MacroDataProvider Protocol."""
+
+    def get_recent_macro_events(self, since: datetime) -> list[MacroEvent]:
+        return [
+            MacroEvent(
+                indicator=MacroIndicator.CPI,
+                actual=3.2,
+                expected=2.8,
+                surprise=0.4,
+                released_at=datetime.now(timezone.utc) - timedelta(hours=2),
+                headline="CPI comes in hotter than expected at 3.2% vs. 2.8% consensus",
+                evidence=Evidence(
+                    source_name="BLS release",
+                    url="https://example.com/cpi-release",
+                    published_at=datetime.now(timezone.utc) - timedelta(hours=2),
+                    summary="Headline CPI rose 3.2% year-over-year, above the 2.8% consensus estimate, reigniting rate-path uncertainty.",
+                ),
+            )
+        ]

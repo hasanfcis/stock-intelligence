@@ -83,6 +83,12 @@ class StockScore(BaseModel):
     confidence: float = Field(ge=0, le=1)
     catalyst_ids: list[str] = Field(default_factory=list)
     sources: list[Evidence] = Field(default_factory=list)
+    # Technical regime flags, carried onto the score for Phase 5 alerting
+    # (Specification.md Section 14) without needing to re-fetch the full
+    # TechnicalSnapshot to detect a golden cross / breakout change.
+    golden_cross: bool = False
+    death_cross: bool = False
+    breakout: bool = False
 
 
 class MarketContext(BaseModel):

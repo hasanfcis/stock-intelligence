@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: stock_intel
+      POSTGRES_USER: stock_intel
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # FastAPI service — on-demand report runs over HTTP.
+  api:
+    build: .
+    restart: unless-stopped
+    entrypoint: ["uvicorn", "stock_intel.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - db
+
+  # Long-running process that triggers the pipeline once a day and delivers
+  # to Telegram (Specification.md Section 12).
+  scheduler:
+    build: .
+    restart: unless-stopped
+    entrypoint: ["python", "-m", "stock_intel.delivery.scheduler"]
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - db
+
+  # Phase 3 dashboard (Next.js). Talks to `api` over NEXT_PUBLIC_API_URL.
+  web:
+    build: ./web
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  db_data:

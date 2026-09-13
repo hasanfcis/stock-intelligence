@@ -10,6 +10,7 @@ from datetime import datetime
 from typing import Protocol
 
 from ..technical.indicators import Bar
+from ..models.macro import MacroEvent
 
 
 @dataclass
@@ -59,3 +60,7 @@ class FundamentalsProvider(Protocol):
 
 class FilingsProvider(Protocol):
     def get_recent_filings(self, ticker: str, since: datetime) -> list[Filing]: ...
+
+
+class MacroDataProvider(Protocol):
+    def get_recent_macro_events(self, since: datetime) -> list[MacroEvent]: ...

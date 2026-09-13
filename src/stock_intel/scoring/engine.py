@@ -184,4 +184,7 @@ def build_stock_score(
         confidence=confidence,
         catalyst_ids=[c.id for c in catalysts],
         sources=sources,
+        golden_cross=technical.golden_cross,
+        death_cross=technical.death_cross,
+        breakout=technical.breakout,
     )

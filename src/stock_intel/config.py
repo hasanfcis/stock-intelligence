@@ -29,3 +29,7 @@ def load_scoring_config(config_dir: Path = CONFIG_DIR) -> dict:
     if weights and abs(total - 1.0) > 1e-6:
         raise ValueError(f"scoring_weights.yaml weights must sum to 1.0, got {total}")
     return cfg
+
+
+def load_macro_exposure_config(config_dir: Path = CONFIG_DIR) -> dict:
+    return load_yaml("macro_exposure.yaml", config_dir)

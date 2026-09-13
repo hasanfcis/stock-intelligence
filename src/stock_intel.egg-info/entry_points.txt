@@ -1,0 +1,2 @@
+[console_scripts]
+stock-intel = stock_intel.cli:main

@@ -1,0 +1,29 @@
+# Macro exposure by category (Specification.md macro-event addendum).
+#
+# rate_sensitivity: how much a category's valuation depends on discount
+# rates / growth duration. High-multiple, long-duration-growth categories
+# (software/AI, unprofitable-ish semis-adjacent names) are the most exposed
+# to a hawkish rate surprise; capital-intensive equipment makers are less
+# directly exposed to rates but still cyclical.
+#
+# growth_sensitivity: how much a category's near-term thesis depends on
+# macro growth strength (GDP, jobs) — cyclical/consumer-adjacent categories
+# (EV) score higher here than defensive-ish ones.
+#
+# Values are "high" | "medium" | "low". Only "high"/"medium" categories get
+# a macro-derived catalyst at all for a given indicator — "low" means the
+# macro engine treats that category as unexposed and skips it, rather than
+# forcing every stock to react to every CPI print.
+categories:
+  semiconductors:
+    rate_sensitivity: high
+    growth_sensitivity: medium
+  software_ai:
+    rate_sensitivity: high
+    growth_sensitivity: low
+  ev:
+    rate_sensitivity: medium
+    growth_sensitivity: high
+  semi_equipment:
+    rate_sensitivity: medium
+    growth_sensitivity: medium

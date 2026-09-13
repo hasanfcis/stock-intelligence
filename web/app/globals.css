@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-base text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-amber/30;
+  }
+
+  a {
+    @apply text-ink;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-panel border border-border rounded-sm;
+  }
+
+  .hairline-table th {
+    @apply text-left text-xs uppercase tracking-wide text-muted font-normal border-b border-border py-2 px-3;
+  }
+
+  .hairline-table td {
+    @apply border-b border-border py-2 px-3 text-sm;
+  }
+
+  .hairline-table tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .nav-link {
+    @apply block px-3 py-2 text-sm text-muted hover:text-ink transition-colors rounded-sm;
+  }
+
+  .nav-link.active {
+    @apply text-ink bg-white/5;
+  }
+}

@@ -3,27 +3,43 @@ from __future__ import annotations
 import json
 from datetime import date as Date, datetime, timezone
 from pathlib import Path
+from typing import Callable
 
 from ..catalysts.engine import build_catalysts_for_stock
-from ..config import CONFIG_DIR, load_scoring_config
+from ..config import CONFIG_DIR, load_macro_exposure_config, load_scoring_config
 from ..exclusions import apply_exclusions
-from ..models.score import DailyReport, MarketContext
-from ..providers.base import MarketDataProvider, NewsProvider
+from ..macro.engine import build_macro_catalysts
+from ..models.catalyst import Catalyst
+from ..models.score import DailyReport, MarketContext, SentimentSnapshot
+from ..providers.base import MacroDataProvider, MarketDataProvider, NewsProvider
 from ..scoring.engine import build_stock_score
-from ..sentiment.engine import score_sentiment
+from ..sentiment.engine import score_sentiment as _default_score_sentiment
 from ..technical.engine import build_technical_snapshot
 from ..universe import get_universe
+
+SentimentFn = Callable[[str, Date, list[Catalyst]], SentimentSnapshot]
 
 
 def build_daily_report(
     market_data: MarketDataProvider,
     news: NewsProvider,
+    macro_data: MacroDataProvider | None = None,
     tickers: list[str] | None = None,
     as_of: Date | None = None,
     config_dir: Path = CONFIG_DIR,
+    sentiment_fn: SentimentFn = _default_score_sentiment,
+    catalysts_out: dict[str, list[Catalyst]] | None = None,
 ) -> DailyReport:
+    """catalysts_out, if given, is populated {ticker: [Catalyst, ...]} as a
+    side effect — used by delivery/scheduler.py to feed the Phase 5 alert
+    engine without re-running catalyst detection a second time.
+
+    macro_data is optional: with no provider, the macro pipeline simply
+    produces zero macro-derived catalysts rather than failing — callers
+    that haven't wired one up yet (existing CLI/API paths) keep working."""
     as_of = as_of or datetime.now(timezone.utc).date()
     scoring_config = load_scoring_config(config_dir)
+    macro_exposure_config = load_macro_exposure_config(config_dir)
 
     universe = get_universe(config_dir)
     if tickers:
@@ -35,6 +51,15 @@ def build_daily_report(
     sox_bars = market_data.get_price_history("SOX", lookback_days=260)
     spy_closes = [b.close for b in spy_bars.bars]
     sox_closes = [b.close for b in sox_bars.bars]
+
+    # Macro Event -> Implication -> Exposure -> Catalyst pipeline runs once
+    # for the whole universe (Section: macro-event addendum) — a CPI print
+    # is one event, not one event per ticker, and only exposed categories
+    # get a catalyst out of it at all.
+    macro_catalysts_by_ticker: dict[str, list[Catalyst]] = {}
+    if macro_data is not None:
+        macro_events = macro_data.get_recent_macro_events(since=datetime.now(timezone.utc))
+        macro_catalysts_by_ticker = build_macro_catalysts(macro_events, kept, macro_exposure_config)
 
     scores = []
     for stock in kept:
@@ -49,8 +74,11 @@ def build_daily_report(
             for sym in stock.related_symbols
         }
         catalysts = build_catalysts_for_stock(stock, own_news, related_news)
+        catalysts += macro_catalysts_by_ticker.get(stock.symbol, [])
+        if catalysts_out is not None:
+            catalysts_out[stock.symbol] = catalysts
 
-        sentiment = score_sentiment(stock.symbol, as_of, catalysts)
+        sentiment = sentiment_fn(stock.symbol, as_of, catalysts)
 
         score = build_stock_score(
             ticker=stock.symbol,

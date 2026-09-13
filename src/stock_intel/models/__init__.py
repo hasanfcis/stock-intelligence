@@ -9,6 +9,8 @@ from .score import (
     DailyReport,
     MarketContext,
 )
+from .alert import Alert, AlertType
+from .macro import MacroEvent, MacroIndicator
 
 __all__ = [
     "Stock",
@@ -26,4 +28,8 @@ __all__ = [
     "ActionCategory",
     "DailyReport",
     "MarketContext",
+    "Alert",
+    "AlertType",
+    "MacroEvent",
+    "MacroIndicator",
 ]
